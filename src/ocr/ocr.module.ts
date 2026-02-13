@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { GoogleVisionService } from './services/google-vision.service';
-import { OcrProcessor } from './ocr.processor';
+import { DummyOcrService } from './services/dummy-ocr.service';
 import { PrismaModule } from '../prisma/prisma.module';
+import { OcrProcessor } from './ocr.processor';
 
 @Module({
   imports: [PrismaModule],
   providers: [
     {
       provide: 'OCR_SERVICE',
-      useClass: GoogleVisionService,
+      useClass: DummyOcrService, // switched to Dummy
     },
     OcrProcessor,
   ],
