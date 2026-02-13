@@ -25,4 +25,30 @@ model User {
   name        String
   accountType AccountType @default(USER)
   createdAt   DateTime    @default(now())
+  cards       Card[]
+}
+
+enum Status {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+model Card {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  imageUrl    String
+  name        String?
+  email       String?
+  phone       String?
+  jobTitle    String?
+  company     String?
+  address     String?
+  status      Status   @default(PENDING)
+  jobId       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id])
 }
