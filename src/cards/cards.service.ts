@@ -39,4 +39,10 @@ export class CardsService {
   async findAll() {
     return this.prisma.card.findMany();
   }
+
+  async findOne(id: number) {
+    return this.prisma.card.findUnique({
+      where: { id },
+    });
+  }
 }

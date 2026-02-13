@@ -7,6 +7,7 @@ import {
   Body,
   Req,
   UseGuards,
+  Param,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CardsService } from './cards.service';
@@ -50,5 +51,10 @@ export class CardsController {
   async getCards() {
     // Simple fetch all for demo
     return this.cardsService.findAll();
+  }
+
+  @Get(':id')
+  async getCard(@Param('id') id: string) {
+    return this.cardsService.findOne(+id);
   }
 }
